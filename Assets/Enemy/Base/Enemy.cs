@@ -55,12 +55,12 @@ private void Awake() {
     {
         if(IsFacingRight && velocity.x <0f){
             Vector3 rotator = new Vector3(transform.rotation.x,180f,transform.rotation.z);
-            transform.rotation = quaternion.Euler(rotator);
+            transform.rotation = Quaternion.Euler(rotator);
             IsFacingRight = !IsFacingRight;
         }
         else if (!IsFacingRight && velocity.x>0f){
             Vector3 rotator = new Vector3(transform.rotation.x,0f,transform.rotation.z);
-            transform.rotation = quaternion.Euler(rotator);
+            transform.rotation = Quaternion.Euler(rotator);
             IsFacingRight = !IsFacingRight;
         }
     }
