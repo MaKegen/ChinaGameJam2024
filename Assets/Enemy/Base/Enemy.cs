@@ -9,6 +9,7 @@ public class Enemy : MonoBehaviour, IDamageable,IEnemyMovable
     public float CurrentHealth { get; set; }
     public Rigidbody2D RB { get; set; }
     public bool IsFacingRight { get; set; } = true;
+
     #region State Machine Variables
     public EnemyStateMachine StateMachine { get; set; }
     public EnemyIdleState IdleState { get; set; }
@@ -16,17 +17,29 @@ public class Enemy : MonoBehaviour, IDamageable,IEnemyMovable
     public EnemyAttackState AttackState { get; set; }
     #endregion
 
-private void Awake() {
+    #region Idle Variables
+    public float RandomMovementRange = 5f;
+    public float RandomMovementSpeed = 1f;
+    #endregion
+
+    private void Awake() {
     StateMachine = new EnemyStateMachine();
     IdleState = new EnemyIdleState(this,StateMachine);
     ChaseState = new EnemyChaseState(this,StateMachine);
     AttackState = new EnemyAttackState(this,StateMachine);
 
-}
+    }
     private void Start() {
         CurrentHealth = MaxHealth;
         RB = GetComponent<Rigidbody2D>();
         StateMachine.Initialize(IdleState);
+    }
+
+    private void Update() {
+    StateMachine.CurrentEnemyState.FrameUpdate();
+    }
+    private void FixedUpdate() {
+    StateMachine.CurrentEnemyState.FrameUpdate();
     }
 
 #region Health / Die Functions
@@ -70,12 +83,14 @@ private void Awake() {
 public enum AnimaitonTriggerType{
     EnemyDamaged,
     PlayFootStepSound
-}
+    }
 #endregion
 
 private void AnimationTriggerEvent(AnimaitonTriggerType triggerType){
-    //
+    StateMachine.CurrentEnemyState.AnimationTriggerEvent(triggerType);
 }
 }
+
+
 
 
