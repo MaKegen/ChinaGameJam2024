@@ -6,7 +6,6 @@ using UnityEngine.Events;
 
 public class TrapDetection : MonoBehaviour
 {
-    private bool timeupindicator = false;
     // Start is called before the first frame update
     void Start()
     {
