@@ -11,7 +11,7 @@ public class Character_Control_New : MonoBehaviour
     private InputActions PlayerInput;
     
 
-    #region Player Control
+    #region Player Move Control
     private CharacterController Player;
     private Vector2 Player_InputVector;
     private Vector3 PlayerMoveVector;
@@ -47,8 +47,13 @@ public class Character_Control_New : MonoBehaviour
     private Quaternion RotationAngle;
     #endregion
 
+    #region Animation Control
+    private Animator PlayerAni;
+    #endregion
+
     private void Awake() {
         Player = GetComponent<CharacterController>();
+        PlayerAni = GetComponentInChildren<Animator>();
         PlayerInput = new InputActions();
     }
     private void OnEnable() {
@@ -75,6 +80,7 @@ public class Character_Control_New : MonoBehaviour
         Move();
         HandleGravity();
         HandleClimb();
+        HandleAnimation();
         //Debug.Log("ClimbAble："+ClimbAble);
         //Debug.Log("Climb_Input："+Climb_Input);
         //Debug.Log("IsUpBrick:"+UpDetection.isUpBrick);
@@ -83,6 +89,9 @@ public class Character_Control_New : MonoBehaviour
 
 
     }
+
+
+
     private void LateUpdate() {
         HandleCamera();
     }
@@ -142,10 +151,21 @@ public class Character_Control_New : MonoBehaviour
         else{
             ClimbAble = false;
         }
+
+    }
+        private void HandleAnimation()
+    {
+        if(PlayerIsMoving){
+            PlayerAni.SetBool("isWalking",true);
+        }
+        else{
+            PlayerAni.SetBool("isWalking",false);
+        }
         if(ClimbAble&&Climb_Input){
             //玩家攀爬，先播放动画，trigger方法，transform.position
-            transform.position += new Vector3 (0f,1f,0.5f);
-            Debug.Log("aa");
+            PlayerAni.SetBool("isClimbing",true);
+            //transform.position += new Vector3 (0f,1f,0.5f);
+            //Debug.Log("aa");
         }
     }
 }
