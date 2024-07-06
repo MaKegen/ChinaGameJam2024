@@ -34,7 +34,7 @@ public class Character_Control_New : MonoBehaviour
     #endregion
 
     #region Camera Control
-    [SerializeField] Transform Camera;
+//    [SerializeField] Transform Camera;
     [SerializeField] Vector3 CameraOffset;
     [SerializeField] float CameraHeight;
     private Vector2 CameraRotation_InputVector;
@@ -81,10 +81,10 @@ public class Character_Control_New : MonoBehaviour
         HandleGravity();
         HandleClimb();
         HandleAnimation();
-        //Debug.Log("ClimbAble："+ClimbAble);
-        //Debug.Log("Climb_Input："+Climb_Input);
-        //Debug.Log("IsUpBrick:"+UpDetection.isUpBrick);
-        //Debug.Log("IsDwonBrick:"+DownDetection.isDownBrick);
+        Debug.Log("ClimbAble："+ClimbAble);
+        Debug.Log("Climb_Input："+Climb_Input);
+        Debug.Log("IsUpBrick:"+UpDetection.isUpBrick);
+        Debug.Log("IsDwonBrick:"+DownDetection.isDownBrick);
 
 
 
@@ -93,7 +93,7 @@ public class Character_Control_New : MonoBehaviour
 
 
     private void LateUpdate() {
-        HandleCamera();
+        //HandleCamera();
     }
 
 
@@ -119,7 +119,7 @@ public class Character_Control_New : MonoBehaviour
     {
         Climb_Input = false;
     }
-    private void HandleCamera()
+/*    private void HandleCamera()
     {
         XAxisRotation += CameraRotation_InputVector.y*YAxisSensitivity*(-1);
         YAxisRotation += CameraRotation_InputVector.x*XAxisSensitivity;
@@ -128,6 +128,7 @@ public class Character_Control_New : MonoBehaviour
         Camera.position = transform.position - RotationAngle * CameraOffset + Vector3.up*CameraHeight;
         Camera.rotation = RotationAngle;
     }
+*/
     private void Move(){
         C = Quaternion.Euler(0f,YAxisRotation,0f);
         if(PlayerIsMoving){

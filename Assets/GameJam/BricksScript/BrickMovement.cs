@@ -18,7 +18,7 @@ public class BrickMovement : MonoBehaviour
             foreach(Transform child in transform){
                 int x = (int)child.position.x;
                 int y = (int)child.position.y;
-                if (x<0 || x>=WIDTH||y<=0||y>=HEIGHT||grid[x,y] != null){
+                if (x<0 || x>=WIDTH||y<0||y>=HEIGHT||grid[x,y] != null){
                     return false;
                 }
                 
@@ -75,6 +75,7 @@ public class BrickMovement : MonoBehaviour
             Land();
             ClearFullRows();
             enabled = false;
+            GameManager.Instance.SpawnTetromino();
         }
     }
      void Land()

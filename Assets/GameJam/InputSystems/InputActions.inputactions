@@ -75,28 +75,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "up",
-                    "id": "55c1dfd3-a0cc-4211-b6de-1f71632051db",
-                    "path": "<Keyboard>/w",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "be2a7e5e-4982-4429-b2e4-338aa4cdac16",
-                    "path": "<Keyboard>/s",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "left",
                     "id": "304729a1-1f69-4cfb-94ef-dc399cbb009e",
                     "path": "<Keyboard>/a",
@@ -247,6 +225,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "ResetAnything",
+                    "type": "Button",
+                    "id": "8bb57e0f-5aff-4676-bc3c-735cb2d8f37d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -291,6 +278,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "BrickRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67bcbec3-18fe-444d-9d9e-22119b390cbf",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ResetAnything",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

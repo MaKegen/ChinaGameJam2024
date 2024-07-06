@@ -97,28 +97,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": ""up"",
-                    ""id"": ""55c1dfd3-a0cc-4211-b6de-1f71632051db"",
-                    ""path"": ""<Keyboard>/w"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""down"",
-                    ""id"": ""be2a7e5e-4982-4429-b2e4-338aa4cdac16"",
-                    ""path"": ""<Keyboard>/s"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Move"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
                     ""name"": ""left"",
                     ""id"": ""304729a1-1f69-4cfb-94ef-dc399cbb009e"",
                     ""path"": ""<Keyboard>/a"",
@@ -269,6 +247,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetAnything"",
+                    ""type"": ""Button"",
+                    ""id"": ""8bb57e0f-5aff-4676-bc3c-735cb2d8f37d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -315,6 +302,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""BrickRotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""67bcbec3-18fe-444d-9d9e-22119b390cbf"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetAnything"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -334,6 +332,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_BrickControl_BrickRight = m_BrickControl.FindAction("BrickRight", throwIfNotFound: true);
         m_BrickControl_BrickDrop = m_BrickControl.FindAction("BrickDrop", throwIfNotFound: true);
         m_BrickControl_BrickRotate = m_BrickControl.FindAction("BrickRotate", throwIfNotFound: true);
+        m_BrickControl_ResetAnything = m_BrickControl.FindAction("ResetAnything", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -477,6 +476,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_BrickControl_BrickRight;
     private readonly InputAction m_BrickControl_BrickDrop;
     private readonly InputAction m_BrickControl_BrickRotate;
+    private readonly InputAction m_BrickControl_ResetAnything;
     public struct BrickControlActions
     {
         private @InputActions m_Wrapper;
@@ -485,6 +485,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @BrickRight => m_Wrapper.m_BrickControl_BrickRight;
         public InputAction @BrickDrop => m_Wrapper.m_BrickControl_BrickDrop;
         public InputAction @BrickRotate => m_Wrapper.m_BrickControl_BrickRotate;
+        public InputAction @ResetAnything => m_Wrapper.m_BrickControl_ResetAnything;
         public InputActionMap Get() { return m_Wrapper.m_BrickControl; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -506,6 +507,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @BrickRotate.started += instance.OnBrickRotate;
             @BrickRotate.performed += instance.OnBrickRotate;
             @BrickRotate.canceled += instance.OnBrickRotate;
+            @ResetAnything.started += instance.OnResetAnything;
+            @ResetAnything.performed += instance.OnResetAnything;
+            @ResetAnything.canceled += instance.OnResetAnything;
         }
 
         private void UnregisterCallbacks(IBrickControlActions instance)
@@ -522,6 +526,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @BrickRotate.started -= instance.OnBrickRotate;
             @BrickRotate.performed -= instance.OnBrickRotate;
             @BrickRotate.canceled -= instance.OnBrickRotate;
+            @ResetAnything.started -= instance.OnResetAnything;
+            @ResetAnything.performed -= instance.OnResetAnything;
+            @ResetAnything.canceled -= instance.OnResetAnything;
         }
 
         public void RemoveCallbacks(IBrickControlActions instance)
@@ -553,5 +560,6 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnBrickRight(InputAction.CallbackContext context);
         void OnBrickDrop(InputAction.CallbackContext context);
         void OnBrickRotate(InputAction.CallbackContext context);
+        void OnResetAnything(InputAction.CallbackContext context);
     }
 }
