@@ -18,7 +18,7 @@ public class BrickMovement : MonoBehaviour
             foreach(Transform child in transform){
                 int x = (int)child.position.x;
                 int y = (int)child.position.y;
-                if (x<0 || x>=WIDTH||y<0||y>=HEIGHT||grid[x,y] != null){
+                if (x<0 || x>=WIDTH||y<=0||y>=HEIGHT||grid[x,y] != null){
                     return false;
                 }
                 
@@ -56,15 +56,15 @@ public class BrickMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Moveable);
+
     }
 
 
         private void BrickMoveRotate(InputAction.CallbackContext context)
     {
-        transform.Rotate(Vector3.forward,90);
+        transform.Rotate(Vector3.forward,90f);
         if(!Moveable){
-            transform.Rotate(Vector3.forward,-90);
+            transform.Rotate(Vector3.forward,-90f);
         }
     }
         private void BrickMoveDrop(InputAction.CallbackContext context)
