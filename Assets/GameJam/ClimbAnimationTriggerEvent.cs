@@ -15,10 +15,18 @@ public class ClimbAnimationTriggerEvent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Debug.Log(Player.transform.rotation.y);
     }
     public void ClimbAction(){
-        Player.transform.position += new Vector3 (0f,1f,0.5f);
-        ani.SetBool("isClimbing",false);
+        if(Player.transform.rotation.y > 0){
+            Player.transform.position += new Vector3 (1f,1.1f,0f);
+            ani.SetBool("isClimbing",false);
+        }
+        else if (Player.transform.rotation.y < 0){
+            Player.transform.position += new Vector3 (-1f,1.1f,0f);
+            ani.SetBool("isClimbing",false);
+        }
+        
+        
     }
 }
