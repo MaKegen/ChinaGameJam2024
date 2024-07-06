@@ -207,6 +207,94 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "BrickControl",
+            "id": "9ff0b4e2-cf33-4f0a-bdc1-fd92a6146f18",
+            "actions": [
+                {
+                    "name": "BrickLeft",
+                    "type": "Button",
+                    "id": "731801b1-862a-43d0-b915-5a9617d519af",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BrickRight",
+                    "type": "Button",
+                    "id": "634334f6-da0e-4791-b11e-dde09f81a84a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BrickDrop",
+                    "type": "Button",
+                    "id": "386fa300-07cb-495b-921c-a01728e98619",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "BrickRotate",
+                    "type": "Button",
+                    "id": "a9c6c2e5-e79e-49e0-bc1b-cadf5a01a127",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "42cc4ab3-cd66-47fb-ab79-51ce19f29681",
+                    "path": "<Keyboard>/leftArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BrickLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5971b5ca-a50b-41da-b68e-13914a79cdcb",
+                    "path": "<Keyboard>/rightArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BrickRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "af82cebf-7a6b-479c-b239-08902a7454de",
+                    "path": "<Keyboard>/downArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BrickDrop",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b207d08b-3b10-4908-a94a-2e574b80303e",
+                    "path": "<Keyboard>/upArrow",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BrickRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

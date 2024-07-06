@@ -229,6 +229,94 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BrickControl"",
+            ""id"": ""9ff0b4e2-cf33-4f0a-bdc1-fd92a6146f18"",
+            ""actions"": [
+                {
+                    ""name"": ""BrickLeft"",
+                    ""type"": ""Button"",
+                    ""id"": ""731801b1-862a-43d0-b915-5a9617d519af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BrickRight"",
+                    ""type"": ""Button"",
+                    ""id"": ""634334f6-da0e-4791-b11e-dde09f81a84a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BrickDrop"",
+                    ""type"": ""Button"",
+                    ""id"": ""386fa300-07cb-495b-921c-a01728e98619"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""BrickRotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9c6c2e5-e79e-49e0-bc1b-cadf5a01a127"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""42cc4ab3-cd66-47fb-ab79-51ce19f29681"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BrickLeft"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5971b5ca-a50b-41da-b68e-13914a79cdcb"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BrickRight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""af82cebf-7a6b-479c-b239-08902a7454de"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BrickDrop"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b207d08b-3b10-4908-a94a-2e574b80303e"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""BrickRotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -240,6 +328,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_CharacterControls_Crouch = m_CharacterControls.FindAction("Crouch", throwIfNotFound: true);
         m_CharacterControls_Climb = m_CharacterControls.FindAction("Climb", throwIfNotFound: true);
         m_CharacterControls_ViewControl = m_CharacterControls.FindAction("ViewControl", throwIfNotFound: true);
+        // BrickControl
+        m_BrickControl = asset.FindActionMap("BrickControl", throwIfNotFound: true);
+        m_BrickControl_BrickLeft = m_BrickControl.FindAction("BrickLeft", throwIfNotFound: true);
+        m_BrickControl_BrickRight = m_BrickControl.FindAction("BrickRight", throwIfNotFound: true);
+        m_BrickControl_BrickDrop = m_BrickControl.FindAction("BrickDrop", throwIfNotFound: true);
+        m_BrickControl_BrickRotate = m_BrickControl.FindAction("BrickRotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -375,6 +469,76 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public CharacterControlsActions @CharacterControls => new CharacterControlsActions(this);
+
+    // BrickControl
+    private readonly InputActionMap m_BrickControl;
+    private List<IBrickControlActions> m_BrickControlActionsCallbackInterfaces = new List<IBrickControlActions>();
+    private readonly InputAction m_BrickControl_BrickLeft;
+    private readonly InputAction m_BrickControl_BrickRight;
+    private readonly InputAction m_BrickControl_BrickDrop;
+    private readonly InputAction m_BrickControl_BrickRotate;
+    public struct BrickControlActions
+    {
+        private @InputActions m_Wrapper;
+        public BrickControlActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @BrickLeft => m_Wrapper.m_BrickControl_BrickLeft;
+        public InputAction @BrickRight => m_Wrapper.m_BrickControl_BrickRight;
+        public InputAction @BrickDrop => m_Wrapper.m_BrickControl_BrickDrop;
+        public InputAction @BrickRotate => m_Wrapper.m_BrickControl_BrickRotate;
+        public InputActionMap Get() { return m_Wrapper.m_BrickControl; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BrickControlActions set) { return set.Get(); }
+        public void AddCallbacks(IBrickControlActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BrickControlActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BrickControlActionsCallbackInterfaces.Add(instance);
+            @BrickLeft.started += instance.OnBrickLeft;
+            @BrickLeft.performed += instance.OnBrickLeft;
+            @BrickLeft.canceled += instance.OnBrickLeft;
+            @BrickRight.started += instance.OnBrickRight;
+            @BrickRight.performed += instance.OnBrickRight;
+            @BrickRight.canceled += instance.OnBrickRight;
+            @BrickDrop.started += instance.OnBrickDrop;
+            @BrickDrop.performed += instance.OnBrickDrop;
+            @BrickDrop.canceled += instance.OnBrickDrop;
+            @BrickRotate.started += instance.OnBrickRotate;
+            @BrickRotate.performed += instance.OnBrickRotate;
+            @BrickRotate.canceled += instance.OnBrickRotate;
+        }
+
+        private void UnregisterCallbacks(IBrickControlActions instance)
+        {
+            @BrickLeft.started -= instance.OnBrickLeft;
+            @BrickLeft.performed -= instance.OnBrickLeft;
+            @BrickLeft.canceled -= instance.OnBrickLeft;
+            @BrickRight.started -= instance.OnBrickRight;
+            @BrickRight.performed -= instance.OnBrickRight;
+            @BrickRight.canceled -= instance.OnBrickRight;
+            @BrickDrop.started -= instance.OnBrickDrop;
+            @BrickDrop.performed -= instance.OnBrickDrop;
+            @BrickDrop.canceled -= instance.OnBrickDrop;
+            @BrickRotate.started -= instance.OnBrickRotate;
+            @BrickRotate.performed -= instance.OnBrickRotate;
+            @BrickRotate.canceled -= instance.OnBrickRotate;
+        }
+
+        public void RemoveCallbacks(IBrickControlActions instance)
+        {
+            if (m_Wrapper.m_BrickControlActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBrickControlActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BrickControlActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BrickControlActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BrickControlActions @BrickControl => new BrickControlActions(this);
     public interface ICharacterControlsActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -382,5 +546,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
         void OnViewControl(InputAction.CallbackContext context);
+    }
+    public interface IBrickControlActions
+    {
+        void OnBrickLeft(InputAction.CallbackContext context);
+        void OnBrickRight(InputAction.CallbackContext context);
+        void OnBrickDrop(InputAction.CallbackContext context);
+        void OnBrickRotate(InputAction.CallbackContext context);
     }
 }
