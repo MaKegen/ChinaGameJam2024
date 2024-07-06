@@ -242,10 +242,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerSpeed: 4
   GravityValue: 3
-  RotationPerFrame: 3
+  RotationPerFrame: 10
   DownDetection: {fileID: 2363768746129339741}
   UpDetection: {fileID: 1287425355237843674}
-  Camera: {fileID: 0}
   CameraOffset: {x: 0, y: 0, z: 4}
   CameraHeight: 1
   XAxisSensitivity: 1
