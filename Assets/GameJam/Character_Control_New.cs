@@ -50,7 +50,6 @@ public class Character_Control_New : MonoBehaviour
     #region Animation Control
     private Animator PlayerAni;
     #endregion
-
     private void Awake() {
         Player = GetComponent<CharacterController>();
         PlayerAni = GetComponentInChildren<Animator>();
